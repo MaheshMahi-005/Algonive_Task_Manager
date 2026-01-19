@@ -38,13 +38,17 @@ function displayTasks(taskArray) {
   taskList.innerHTML = "";
   taskArray.forEach((task) => {
     const div = document.createElement("div");
-    div.className = "task" + (task.completed ? " completed" : "");
+    div.className = "task-card" + (task.completed ? " completed" : "");
     div.innerHTML = `
-    <h3>${task.title}</h3>
-    <p>${task.description}</p>
-    <p>Due :${task.dueDate}</p>
-    <button onclick="toggleTask(${task.id})">✔️</button>
-    <button onclick="deleteTask(${task.id})">❌</button>
+    <div class="task-info">
+       <h3>${task.title}</h3>
+       <p>${task.description}</p>
+       <p>Due: ${task.dueDate}</p>
+    </div>
+    <div class="task-actions">
+       <button class="btn done" onclick="toggleTask(${task.id})">✔️</button>
+       <button class="btn delete" onclick="deleteTask(${task.id})">❌</button>
+    </div>
 `;
     taskList.appendChild(div);
   });

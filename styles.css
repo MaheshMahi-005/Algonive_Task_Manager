@@ -6,6 +6,7 @@
 
   .task-actions {
     margin-top: 10px;
+    align-self: flex-end;
   }
 }
 @media (max-width: 900px) {
@@ -113,7 +114,6 @@ body {
   -webkit-backdrop-filter: blur(15px);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 header {
@@ -139,9 +139,15 @@ header p {
 .task-form input,
 .task-form textarea {
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: 9px;
+  border: 1px solid grey;
+  outline: none;
   font-size: 14px;
+}
+.task-form input:focus,
+.task-form textarea:focus {
+  border-color: black;
+  box-shadow: 0 0 0 2px rbga(90, 84, 241, 0.2);
 }
 
 .task-form textarea {
@@ -196,6 +202,8 @@ header p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
+  width: 100%;
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(12px);
@@ -213,14 +221,19 @@ header p {
   transform: translateY(-4px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
+.task-info {
+  flex: 1;
+}
 .task-info h3 {
   font-size: 16px;
   color: #111;
+  margin-bottom: 4px;
 }
 
 .task-info p {
-  font-size: 13px;
-  color: #555;
+  margin: 2px 0;
+  font-size: 14px;
+  color: rgb(116, 57, 57);
 }
 
 .task-info span {
@@ -228,28 +241,37 @@ header p {
   color: #888;
 }
 
-.task-actions button {
+.task-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
-  padding: 8px 10px;
-  border-radius: 6px;
   cursor: pointer;
-  margin-left: 5px;
+  font-size: 15px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s ease;
 }
-
-.task-actions .done {
-  background: #22c55e;
+.btn:hover {
+  transform: scale(1.15);
 }
-
-.task.completed {
-  opacity: 0.65;
-  text-decoration: line-through;
-}
-
-.task-actions .delete {
-  background: #ef4444;
+.done {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
   color: white;
+  box-shadow: 0 6px 15px rgba(34, 197, 94, 0.45);
 }
-.sub {
-  font-size: 12px;
-  color: #24272c;
+
+.delete {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  box-shadow: 0 6px 15px rgba(239, 68, 68, 0.45);
 }
