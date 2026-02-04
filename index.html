@@ -2,19 +2,31 @@
 <html>
   <head lang="en">
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
     <title>Task Manager</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="layout">
-      <section class="layout-1">
-        <div class="overlay">
-          <h1>Stay Organized</h1>
-          <p>Plan Your Tasks.Achieve Your Goals.</p>
+    <main class="dashboard">
+      <section class="stats">
+        <div class="dash-card">
+          <p>All</p>
+          <strong id="aCount">0</strong>
+        </div>
+
+        <div class="dash-card">
+          <p>Pending</p>
+          <strong id="pCount">0</strong>
+        </div>
+        <div class="dash-card">
+          <p>Completed</p>
+          <strong id="cCount">0</strong>
         </div>
       </section>
-      <section class="layout-2">
+    </main>
+
+    <main class="page">
+      <div class="layout">
         <div class="container">
           <header>
             <h1>Task Manager</h1>
@@ -22,14 +34,13 @@
           </header>
 
           <section class="task-form">
-            <input type="text" id="title" name="title" placeholder="Title" />
+            <input type="text" id="title" placeholder="Title" />
             <textarea
-              id="description"
-              name="description"
               placeholder="Task Description"
+              id="description"
             ></textarea>
-            <input type="date" id="dueDate" name="dueDate" />
-            <button onclick="addTask()">Add Task</button>
+            <input type="date" id="dueDate" />
+            <button onclick="addTask()">Add Tasks</button>
           </section>
 
           <section class="filters">
@@ -43,11 +54,11 @@
               Pending
             </button>
           </section>
-
-          <section class="task-list" id="taskList"></section>
         </div>
-      </section>
+        <section class="task-list" id="taskList"></section>
+      </div>
     </main>
+
     <script src="script.js"></script>
   </body>
 </html>

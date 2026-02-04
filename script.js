@@ -36,34 +36,60 @@ function saveTasks() {
 function displayTasks(taskArray) {
   const taskList = document.getElementById("taskList");
   taskList.innerHTML = "";
+  if (taskArray.length === 0) {
+    taskList.style.display = "none";
+    return;
+  }
+  taskList.style.display = "flex";
+
   taskArray.forEach((task) => {
     const div = document.createElement("div");
-    div.className = "task-card" + (task.completed ? " completed" : "");
+    div.className = "task-card" + (task.completed ? " completed" : " pending");
     div.innerHTML = `
-    <div class="task-info">
-       <h3>${task.title}</h3>
-       <p>${task.description}</p>
-       <p>Due: ${task.dueDate}</p>
+    <div>
+      <h3>${task.title}</h3>
+      <p>${task.description}</p>
+      <p>Due :${task.dueDate}</p>
     </div>
     <div class="task-actions">
-       <button class="btn done" onclick="toggleTask(${task.id})">✔️</button>
-       <button class="btn delete" onclick="deleteTask(${task.id})">❌</button>
-    </div>
+    ${
+      !task.completed
+        ? `<button id="1" onclick="toggleTask(${task.id})">✔️</button>`
+        : ""
+    }
+      <button id="2" onclick="deleteTask(${task.id})">❌</button>
+    </div> 
 `;
     taskList.appendChild(div);
   });
+  updateDashBoard();
 }
 
 function deleteTask(id) {
-  tasks = tasks.filter((task) => task.id !== id);
-  saveTasks();
-  displayTasks(tasks);
+  const card = document
+    .querySelector(`.task-card button.delete[onclick="deleteTask(${id})"]`)
+    ?.closest(".task-card");
+
+  if (card) {
+    card.classList.add("deleting");
+  }
+
+  alert("Task deleted");
+
+  setTimeout(() => {
+    tasks = tasks.filter((task) => task.id !== id);
+    saveTasks();
+    displayTasks(tasks);
+  }, 300);
 }
 
 function toggleTask(id) {
-  tasks = tasks.map((task) =>
-    task.id === id ? { ...task, completed: !task.completed } : task,
-  );
+  tasks = tasks.map((task) => {
+    if (task.id === id) {
+      return { ...task, completed: !task.completed };
+    }
+    return task;
+  });
   saveTasks();
   displayTasks(tasks);
 }
@@ -92,4 +118,14 @@ function setFilter(type, btn) {
   } else {
     displayTasks(tasks);
   }
+}
+
+function updateDashBoard() {
+  const all = tasks.length;
+  const completed = tasks.filter((t) => t.completed).length;
+  const pending = all - completed;
+
+  document.getElementById("aCount").innerText = all;
+  document.getElementById("pCount").innerHTML = pending;
+  document.getElementById("cCount").innerHTML = completed;
 }
